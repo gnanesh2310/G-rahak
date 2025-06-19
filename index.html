@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G'rahak - Student-Led Influencer Marketing</title>
+    <meta name="description" content="G'rahak is a student-led influencer marketing platform connecting brands with authentic creators. Founded by VNIT Nagpur students.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/public/placeholder-logo.svg" type="image/svg+xml">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="G'rahak - Student-Led Influencer Marketing">
+    <meta property="og:description" content="Connect with verified creators who align perfectly with your brand values and target audience.">
+    <meta property="og:image" content="/public/placeholder.jpg">
+    <meta property="og:url" content="https://grahak.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="G'rahak - Student-Led Influencer Marketing">
+    <meta name="twitter:description" content="Connect with verified creators who align perfectly with your brand values and target audience.">
+    <meta name="twitter:image" content="/public/placeholder.jpg">
+    
+    <!-- Preload Next.js -->
+    <link rel="preload" href="/_next/static/chunks/main.js" as="script">
+    
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-blue: #3b82f6;
+            --primary-purple: #8b5cf6;
+            --primary-green: #10b981;
+            --gradient-bg: linear-gradient(135deg, #10b981 0%, #3b82f6 50%, #8b5cf6 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: #f8fafc;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+        
+        /* Loading Screen */
+        .loading-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-container.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .logo-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: var(--gradient-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+            transform: rotate(45deg);
+            animation: logoShine 3s ease-in-out infinite;
+        }
+        
+        @keyframes logoShine {
+            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .logo-text {
+            font-size: 36px;
+            font-weight: 700;
+            background: var(--gradient-bg);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary-blue);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            margin-top: 16px;
+            font-size: 18px;
+            color: #64748b;
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 24px;
+            background: var(--gradient-bg);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        p {
+            font-size: 20px;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto 48px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 64px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .section-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-bg);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .section-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #1f2937;
+        }
+        
+        .section-card p {
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 32px 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-container" id="loading">
+        <div class="logo-container">
+            <div class="logo-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles" style="color: white;">
+                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                    <path d="M5 3v4"/>
+                    <path d="M3 5h4"/>
+                    <path d="M19 17v4"/>
+                    <path d="M17 19h4"/>
+                </svg>
+            </div>
+            <div class="logo-text">G'rahak</div>
+        </div>
+        <div class="spinner"></div>
+        <div class="loading-text">Loading amazing experiences...</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Welcome to G'rahak</h1>
+        <p>Student-led influencer marketing platform connecting brands with authentic creators. Founded by VNIT Nagpur students Karanam Gnanesh Chowdary and Ravindra Dubey.</p>
+        
+        <div class="cta-buttons">
+            <a href="/app" class="btn btn-primary">Launch App</a>
+            <a href="#sections" class="btn btn-secondary">Explore Sections</a>
+        </div>
+        
+        <div class="section-links" id="sections">
+            <a href="/app#services" class="section-card">
+                <h3>Our Services</h3>
+                <p>Discover our innovative influencer marketing solutions designed for the modern digital landscape.</p>
+            </a>
+            
+            <a href="/app#about" class="section-card">
+                <h3>About Us</h3>
+                <p>Learn about our student-led startup journey and our mission to revolutionize influencer marketing.</p>
+            </a>
+            
+            <a href="/app#case-studies" class="section-card">
+                <h3>Success Stories</h3>
+                <p>See how we've helped local businesses and startups achieve remarkable results.</p>
+            </a>
+            
+            <a href="/app#influencers" class="section-card">
+                <h3>Creator Network</h3>
+                <p>Connect with verified creators who align perfectly with your brand values and target audience.</p>
+            </a>
+            
+            <a href="/app#testimonials" class="section-card">
+                <h3>Client Testimonials</h3>
+                <p>Hear from brands that have trusted us with their influencer marketing campaigns.</p>
+            </a>
+            
+            <a href="/app#founders" class="section-card">
+                <h3>Meet Our Founders</h3>
+                <p>Get to know the passionate VNIT Nagpur students behind G'rahak.</p>
+            </a>
+            
+            <a href="/app#contact" class="section-card">
+                <h3>Contact Us</h3>
+                <p>Ready to transform your brand? Let's discuss how we can help you achieve incredible results.</p>
+            </a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2024 G'rahak. All rights reserved. Made with ❤️ by students at VNIT Nagpur.</p>
+    </footer>
+
+    <script>
+        // Simulate loading and redirect to Next.js app
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if we should redirect to a specific section
+            const hash = window.location.hash;
+            
+            // Simulate loading for 1.5 seconds
+            setTimeout(() => {
+                const loader = document.getElementById('loading');
+                loader.classList.add('hidden');
+                
+                // If there's a direct link to the app with a hash, redirect after loading
+                if (hash && hash.startsWith('#')) {
+                    const section = hash.substring(1);
+                    if (section !== 'sections') {
+                        window.location.href = `/app#${section}`;
+                    }
+                }
+            }, 1500);
+        });
+        
+        // Handle app links
+        document.querySelectorAll('a[href^="/app"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                
+                // Show loading screen
+                const loader = document.getElementById('loading');
+                loader.classList.remove('hidden');
+                
+                // Redirect after a short delay
+                setTimeout(() => {
+                    window.location.href = href.replace('/app', '/');
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
