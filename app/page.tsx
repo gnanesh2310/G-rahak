@@ -110,6 +110,7 @@ export default function HomePage() {
 
   const testimonials = [
     {
+      // reviews
       name: "Priya Sharma",
       company: "Local Fashion Boutique",
       role: "Store Owner",
@@ -149,18 +150,19 @@ export default function HomePage() {
 
   const founders = [
     {
-      name: "Karanam Gnanesh Chowdary",
-      role: "Co-Founder & CEO",
-      bio: "3rd year Computer Science student at VNIT Nagpur with a passion for technology and entrepreneurship. Leading G'rahak's vision to democratize influencer marketing for businesses of all sizes.",
+      //founders
+      name: "Ravindra Dubey",
+      role: "Co-Founder ",
+      bio: "3rd year eletrical and electronics engineering  student at VNIT Nagpur with a passion for technology and entrepreneurship. Leading G'rahak's vision to democratize influencer marketing for businesses of all sizes.",
       image: "/placeholder.svg?height=300&width=300",
       linkedin: "#",
       twitter: "#",
       achievements: ["VNIT Student Entrepreneur", "Tech Enthusiast", "Innovation Leader"],
     },
     {
-      name: "Ravindra Dubey",
-      role: "Co-Founder & CTO",
-      bio: "3rd year student at VNIT Nagpur specializing in software development and system architecture. Building G'rahak's technical foundation with modern web technologies.",
+      name: "Karanam Gnanesh Chowdary",
+      role: "Co-Founder ",
+      bio: "3rd year eletrical and electronics engineering student at VNIT Nagpur . Building G'rahak's technical foundation with modern web technologies.",
       image: "/placeholder.svg?height=300&width=300",
       linkedin: "#",
       twitter: "#",
@@ -170,6 +172,7 @@ export default function HomePage() {
 
   const influencers = [
     {
+      //influencers
       name: "Sarah Johnson",
       channelName: "@sarahliving",
       category: "Lifestyle",
@@ -1138,6 +1141,7 @@ export default function HomePage() {
             <div className="flex-shrink-0 fade-in-left">
               <div className="flex items-center gap-3 logo-container">
                 <div className="w-12 h-12 logo-icon rounded-2xl flex items-center justify-center shadow-lg">
+                  {/*header*/}
                   <Sparkles className="h-7 w-7 text-white relative z-10" />
                 </div>
                 <h1 className="text-3xl font-bold gradient-text">G'rahak</h1>
@@ -1216,6 +1220,7 @@ export default function HomePage() {
               <div className="hero-headline animated-headline mb-8">
                 <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
                   Let's{" "}
+                  {/*home section*/}
                   <span key={currentWordIndex} className="typing-word">
                     {typingWords[currentWordIndex]}
                   </span>
@@ -1254,6 +1259,7 @@ export default function HomePage() {
             </div>
             <div className="relative fade-in-right">
               <div className="floating">
+                {//starting img}
                 <Image
                   src="/placeholder.svg?height=700&width=700"
                   alt="Influencer marketing team"
@@ -1290,6 +1296,7 @@ export default function HomePage() {
       </section>
 
       {/* Enhanced Services Section */}
+      {// our services section}
       <section id="services" className="py-24 section-gradient-1">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20 animate-on-scroll">
@@ -1371,7 +1378,7 @@ export default function HomePage() {
                 fresh perspectives.
               </p>
               <p className="text-lg text-gray-600 mb-10 leading-relaxed">
-                Founded in 2024 by two ambitious 3rd-year students, we bring energy, innovation, and a deep
+                Founded in 2025 by two ambitious 3rd-year elctrical students, we bring energy, innovation, and a deep
                 understanding of digital trends to help businesses connect with their target audiences through strategic
                 influencer partnerships.
               </p>
@@ -2042,7 +2049,7 @@ export default function HomePage() {
             ))}
           </div>
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400 animate-on-scroll">
-            <p className="text-lg">© 2024 G'rahak. All rights reserved. Made with ❤️ by students at VNIT Nagpur.</p>
+            <p className="text-lg">© 2025 G'rahak. All rights reserved.</p>
           </div>
         </div>
       </footer>
